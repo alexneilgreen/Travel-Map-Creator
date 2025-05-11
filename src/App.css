@@ -1,38 +1,340 @@
-.App {
-  text-align: center;
+/* App.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+	font-family: "Poppins", sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
+	line-height: 1.6;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app-container {
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header {
+	padding: 20px;
+	background-color: #fff;
+	position: sticky;
+	top: 0;
+	z-index: 1100;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.App-link {
-  color: #61dafb;
+.header h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-content {
+	display: flex;
+	flex-direction: row;
+	height: calc(100vh - 90px);
+	overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+	.main-content {
+		flex-direction: column;
+	}
+}
+
+.sidebar {
+	flex: 0 0 500px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow-y: auto;
+	height: 100%;
+	padding: 20px;
+	border-right: 1px solid #ddd;
+}
+
+.map-view {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+.section {
+	background-color: white;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	font-size: 1.2rem;
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	background-color: #015fd5;
+	color: white;
+	border-radius: 50%;
+	margin-right: 10px;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.hint {
+	font-size: 0.85rem;
+	color: #666;
+	margin-bottom: 15px;
+}
+
+.search-container {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.search-input {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px 0 0 5px;
+	font-family: inherit;
+}
+
+.search-button {
+	padding: 10px 15px;
+	background-color: #015fd5;
+	color: white;
+	border: none;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+}
+
+.search-results {
+	list-style: none;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	max-height: 200px;
+	overflow-y: auto;
+	margin-bottom: 10px;
+}
+
+.search-results li {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 0.9rem;
+}
+
+.search-results li:hover {
+	background-color: #f5f5f5;
+}
+
+.location-list {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow-y: auto;
+	max-height: 300px;
+}
+
+.location-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+	cursor: move;
+}
+
+.location-item:last-child {
+	border-bottom: none;
+}
+
+.location-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.remove-button {
+	border: none;
+	background: none;
+	color: #999;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+.remove-button:hover {
+	color: #ff4d4d;
+}
+
+.map-styles {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.style-option {
+	padding: 8px 5px;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.8rem;
+	text-align: center;
+	background-color: #f5f5f5;
+	transition: all 0.2s;
+	height: 40px;
+}
+
+.map-shapes {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.shape-option {
+	padding: 8px 5px;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.8rem;
+	text-align: center;
+	background-color: #f5f5f5;
+	transition: all 0.2s;
+	height: 40px;
+}
+
+.style-option.selected {
+	border-color: #015fd5;
+}
+
+.input-container {
+	margin-bottom: 15px;
+}
+
+.input-container label {
+	display: block;
+	font-size: 0.8rem;
+	margin-bottom: 5px;
+	color: #667;
+}
+
+.text-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-family: inherit;
+}
+
+.checkbox-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.download-button {
+	padding: 15px;
+	background-color: #015fd5;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-align: center;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s;
+}
+
+.download-button:hover {
+	background-color: #0149a3;
+}
+
+.map-container {
+	height: auto;
+	width: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.shape-option.selected {
+	border-color: #015fd5;
+	background-color: #e6f0ff;
+}
+
+.resolution-settings {
+	display: flex;
+	gap: 10px;
+}
+
+.resolution-settings .input-container {
+	flex: 1;
+}
+
+.text-input.readonly {
+	background-color: #f5f5f5;
+	color: #666;
+}
+
+.map-title-overlay {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px;
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.9) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	z-index: 1000;
+	pointer-events: none;
+}
+
+.map-title {
+	text-align: center;
+	color: #00585e;
+}
+
+.map-title .title {
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.map-title .description {
+	font-size: 1.2rem;
+	opacity: 0.9;
+}
+
+/* Leaflet marker customizations */
+.marker-icon {
+	filter: hue-rotate(140deg);
 }
